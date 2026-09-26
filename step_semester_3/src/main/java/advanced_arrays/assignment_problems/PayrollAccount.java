@@ -1,0 +1,42 @@
+package advanced_arrays.assignment_problems;
+
+public class PayrollAccount {
+    private double basicSalary;
+    private double bonus;
+
+    public PayrollAccount(double basicSalary) {
+        if (basicSalary < 0) {
+            System.out.println("Warning: negative basic salary; starting at Rs 0.0");
+            this.basicSalary = 0;
+        } else {
+            this.basicSalary = basicSalary;
+        }
+    }
+
+    public void creditBonus(double amount) {
+        if (amount <= 0) {
+            System.out.println("Bonus rejected: amount must be positive");
+            return;
+        }
+
+        bonus += amount;
+        System.out.println("Bonus credited: Rs " + amount);
+    }
+
+    public void deductTax(double percent) {
+        if (percent < 0 || percent > 100) {
+            System.out.println("Tax deduction rejected: percent must be between 0 and 100");
+            return;
+        }
+
+        basicSalary -= basicSalary * percent / 100;
+        String percentText = percent == Math.rint(percent)
+            ? String.valueOf((int) percent)
+            : String.valueOf(percent);
+        System.out.println("Tax deducted: " + percentText + "%");
+    }
+
+    public double getNetSalary() {
+        return basicSalary + bonus;
+    }
+}
